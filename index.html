@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasgumma News - Breaking News & Latest Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        .news-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        }
+        
+        .news-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+        
+        .category-badge {
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .search-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 12px 20px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(45deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #6366f1;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #6366f1 }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-black/70 backdrop-blur-md border-b border-gray-800 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="news-gradient text-white font-bold text-2xl px-4 py-2 rounded-lg">
+                        <span class="text-white">KASGUMMA</span>
+                        <span class="text-pink-400">NEWS</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Politics</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Tech</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Sports</a>
+                    <a href="#" class="text-gray-300 hover:text-white transition-colors">Entertainment</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" placeholder="Search news..." class="search-input w-48">
+                        <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                    </div>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center pt-16">
+        <div class="absolute inset-0 z-0">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/30c7e048-024b-4c90-b23a-1d2ebbc5b929.png" alt="Modern news studio background with digital screens showing breaking news headlines and data visualizations" class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+            <div class="floating mb-8">
+                <div class="news-gradient text-6xl md:text-8xl font-bold p-4 rounded-xl inline-block">
+                    <span class="text-white">KASGUMMA</span>
+                    <span class="text-pink-400">NEWS</span>
+                </div>
+            </div>
+            
+            <h1 class="text-3xl md:text-5xl font-bold mb-6 font-['Playfair_Display']">
+                <span class="typewriter">Breaking News, Trusted Insights</span>
+            </h1>
+            
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Delivering accurate, timely news from around the globe with comprehensive coverage and in-depth analysis.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105">
+                    Latest Headlines
+                </button>
+                <button class="border-2 border-indigo-600 text-indigo-400 hover:bg-indigo-600 hover:text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all">
+                    Watch Live News
+                </button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+            <div class="animate-bounce">
+                <i class="fas fa-chevron-down text-2xl text-indigo-400"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Categories -->
+    <section class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12">Browse News Categories</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="news-card p-6 text-center group cursor-pointer">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-indigo-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-landmark text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Politics</h3>
+                    <p class="text-gray-400 text-sm">Government & Policy</p>
+                </div>
+                
+                <div class="news-card p-6 text-center group cursor-pointer">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-green-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-microchip text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Technology</h3>
+                    <p class="text-gray-400 text-sm">Innovation & Gadgets</p>
+                </div>
+                
+                <div class="news-card p-6 text-center group cursor-pointer">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-basketball-ball text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Sports</h3>
+                    <p class="text-gray-400 text-sm">Games & Athletes</p>
+                </div>
+                
+                <div class="news-card p-6 text-center group cursor-pointer">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-film text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Entertainment</h3>
+                    <p class="text-gray-400 text-sm">Movies & Celebrities</p>
+                </div>
+            </div>
+
+            <!-- Featured News -->
+            <h2 class="text-3xl font-bold mb-8">Featured Stories</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <div class="news-card group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b899e94f-17bf-4c4a-bc23-da6acded838e.png" alt="Global economic summit meeting with world leaders around conference table" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge">Politics</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-3 group-hover:text-indigo-400 transition-colors">
+                            Global Economic Summit Concludes with Historic Agreement
+                        </h3>
+                        <p class="text-gray-400 mb-4">
+                            World leaders reach consensus on climate change and trade policies after intense negotiations...
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">3 hours ago</span>
+                            <button class="text-indigo-400 hover:text-indigo-300 transition-colors">
+                                Read More →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News Card 2 -->
+                <div class="news-card group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ca2fdc1b-b7d8-422b-8021-507e51fcef6d.png" alt="Futuristic smartphone with holographic display showing advanced AI interface" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge bg-green-600">Tech</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-3 group-hover:text-indigo-400 transition-colors">
+                            Revolutionary AI Phone Unveiled at Tech Expo
+                        </h3>
+                        <p class="text-gray-400 mb-4">
+                            Next-generation smartphone features advanced AI capabilities that promise to transform mobile computing...
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">5 hours ago</span>
+                            <button class="text-indigo-400 hover:text-indigo-300 transition-colors">
+                                Read More →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News Card 3 -->
+                <div class="news-card group">
+                    <div class="relative overflow-hidden">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a91872a6-0196-445d-9263-a1ab8da5b8bc.png" alt="Championship football match with players celebrating goal in packed stadium" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300" />
+                        <div class="absolute top-4 left-4">
+                            <span class="category-badge bg-red-600">Sports</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-3 group-hover:text-indigo-400 transition-colors">
+                            Underdog Team Stuns Champions in Finals Showdown
+                        </h3>
+                        <p class="text-gray-400 mb-4">
+                            Incredible comeback victory marks one of the biggest upsets in recent sports history...
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500">7 hours ago</span>
+                            <button class="text-indigo-400 hover:text-indigo-300 transition-colors">
+                                Read More →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live News Ticker -->
+    <div class="bg-black border-y border-gray-800 py-3 overflow-hidden">
+        <div class="flex">
+            <div class="flex items-center px-4 py-1 bg-indigo-600 text-white font-semibold">
+                <i class="fas fa-bolt mr-2"></i>
+                LIVE
+            </div>
+            <div class="flex-1">
+                <div class="whitespace-nowrap animate-marquee inline-block">
+                    <span class="text-red-400 font-semibold mx-4">• BREAKING:</span>
+                    <span class="text-white mx-4">Major infrastructure bill passes senate with bipartisan support</span>
+                    <span class="text-red-400 font-semibold mx-4">• ALERT:</span>
+                    <span class="text-white mx-4">Tech giant announces groundbreaking quantum computing breakthrough</span>
+                    <span class="text-red-400 font-semibold mx-4">• UPDATE:</span>
+                    <span class="text-white mx-4">International space mission launches successfully</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest News Section -->
+    <section class="py-16 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold mb-8">Latest News</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="news-card p-6">
+                    <div class="flex items-start mb-4">
+                        <span class="category-badge bg-purple-600 mr-4">Entertainment</span>
+                        <span class="text-sm text-gray-500">2 hours ago</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Award-Winning Director Announces New Film Project</h3>
+                    <p class="text-gray-400 mb-4">
+                        Acclaimed filmmaker reveals details about upcoming science fiction epic featuring all-star cast and revolutionary visual effects.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-700 rounded-full mr-3"></div>
+                        <div>
+                            <p class="text-sm font-semibold">Sarah Chen</p>
+                            <p class="text-xs text-gray-500">Entertainment Correspondent</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="news-card p-6">
+                    <div class="flex items-start mb-4">
+                        <span class="category-badge bg-blue-600 mr-4">Business</span>
+                        <span class="text-sm text-gray-500">4 hours ago</span>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Stock Market Reaches New All-Time High</h3>
+                    <p class="text-gray-400 mb-4">
+                        Major indices surge as investor confidence grows amid positive economic indicators and strong corporate earnings reports.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-700 rounded-full mr-3"></div>
+                        <div>
+                            <p class="text-sm font-semibold">Michael Rodriguez</p>
+                            <p class="text-xs text-gray-500">Business Analyst</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="news-gradient p-8 rounded-2xl">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Stay Informed with Our Newsletter</h2>
+                <p class="text-gray-200 mb-6">Get the latest news delivered directly to your inbox every morning</p>
+                <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="hssayan196@gmailcom class="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder
