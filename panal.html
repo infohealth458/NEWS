@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasgumma News - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        
+        .admin-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        }
+        
+        .sidebar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            width: 280px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 4px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-item:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .nav-item.active {
+            background: rgba(99, 102, 241, 0.3);
+            border-left: 4px solid #6366f1;
+        }
+        
+        .dashboard-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .table-row {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease;
+        }
+        
+        .table-row:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+        
+        .form-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: white;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .chart-container {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div class="sidebar fixed left-0 top-0 h-full overflow-y-auto">
+        <div class="p-6">
+            <div class="admin-gradient text-white font-bold text-xl px-4 py-3 rounded-lg text-center mb-8">
+                <span class="text-white">KASGUMMA</span>
+                <span class="text-pink-400">ADMIN</span>
+            </div>
+            
+            <div class="space-y-2">
+                <div class="nav-item active">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-newspaper mr-3"></i>
+                    Articles
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-users mr-3"></i>
+                    Users
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-chart-line mr-3"></i>
+                    Analytics
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-cog mr-3"></i>
+                    Settings
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-comments mr-3"></i>
+                    Comments
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-tags mr-3"></i>
+                    Categories
+                </div>
+                <div class="nav-item">
+                    <i class="fas fa-bell mr-3"></i>
+                    Notifications
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-800">
+                <div class="nav-item text-red-400">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Logout
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 ml-80 p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold">Admin Dashboard</h1>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" placeholder="Search..." class="form-input w-64">
+                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="relative">
+                        <i class="fas fa-bell text-gray-400 text-xl cursor-pointer"></i>
+                        <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-xs flex items-center justify-center">3</span>
+                    </div>
+                    <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center">
+                        <span class="font-semibold">A</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="stat-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm">Total Articles</p>
+                        <p class="text-2xl font-bold">1,247</p>
+                    </div>
+                    <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-newspaper text-white"></i>
+                    </div>
+                </div>
+                <p class="text-green-400 text-sm mt-2">
+                    <i class="fas fa-arrow-up"></i> 12% from last week
+                </p>
+            </div>
+
+            <div class="stat-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm">Active Users</p>
+                        <p class="text-2xl font-bold">45,892</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-users text-white"></i>
+                    </div>
+                </div>
+                <p class="text-green-400 text-sm mt-2">
+                    <i class="fas fa-arrow-up"></i> 8% from last week
+                </p>
+            </div>
+
+            <div class="stat-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm">Page Views</p>
+                        <p class="text-2xl font-bold">2.1M</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-eye text-white"></i>
+                    </div>
+                </div>
+                <p class="text-green-400 text-sm mt-2">
+                    <i class="fas fa-arrow-up"></i> 23% from last week
+                </p>
+            </div>
+
+            <div class="stat-card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-400 text-sm">Comments</p>
+                        <p class="text-2xl font-bold">8,456</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-comments text-white"></i>
+                    </div>
+                </div>
+                <p class="text-red-400 text-sm mt-2">
+                    <i class="fas fa-arrow-down"></i> 3% from last week
+                </p>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Recent Articles -->
+            <div class="dashboard-card p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold">Recent Articles</h2>
+                    <button class="btn-primary text-sm">
+                        <i class="fas fa-plus mr-2"></i>New Article
+                    </button>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="text-left text-gray-400 text-sm border-b border-gray-800">
+                                <th class="pb-3">Title</th>
+                                <th class="pb-3">Category</th>
+                                <th class="pb-3">Status</th>
+                                <th class="pb-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row">
+                                <td class="py-3">Global Economic Summit Concludes</td>
+                                <td class="py-3 text-indigo-400">Politics</td>
+                                <td class="py-3">
+                                    <span class="bg-green-500 text-white px-2 py-1 rounded text-xs">Published</span>
+                                </td>
+                                <td class="py-3">
+                                    <div class="flex space-x-2">
+                                        <button class="text-blue-400 hover:text-blue-300">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-400 hover:text-red-300">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="py-3">AI Phone Unveiled at Tech Expo</td>
+                                <td class="py-3 text-green-400">Technology</td>
+                                <td class="py-3">
+                                    <span class="bg-yellow-500 text-white px-2 py-1 rounded text-xs">Draft</span>
+                                </td>
+                                <td class="py-3">
+                                    <div class="flex space-x-2">
+                                        <button class="text-blue-400 hover:text-blue-300">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-400 hover:text-red-300">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="py-3">Underdog Team Stuns Champions</td>
+                                <td class="py-3 text-red-400">Sports</td>
+                                <td class="py-3">
+                                    <span class="bg-green-500 text-white px-2 py-1 rounded text-xs">Published</span>
+                                </td>
+                                <td class="py-3">
+                                    <div class="flex space-x-2">
+                                        <button class="text-blue-400 hover:text-blue-300">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-400 hover:text-red-300">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="py-3">New Film Project Announcement</td>
+                                <td class="py-3 text-purple-400">Entertainment</td>
+                                <td class="py-3">
+                                    <span class="bg-gray-500 text-white px-2 py-1 rounded text-xs">Pending</span>
+                                </td>
+                                <td class="py-3">
+                                    <div class="flex space-x-2">
+                                        <button class="text-blue-400 hover:text-blue-300">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-red-400 hover:text-red-300">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Quick Actions & Analytics -->
+            <div class="space-y-6">
+                <!-- Quick Actions -->
+                <div class="dashboard-card p-6">
+                    <h2 class="text-xl font-bold mb-6">Quick Actions</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="p-4 bg-indigo-600 rounded-lg text-center hover:bg-indigo-700 transition-colors">
+                            <i class="fas fa-plus text-2xl mb-2"></i>
+                            <p class="text-sm">New Article</p>
+                        </button>
+                        <button class="p-4 bg-green-600 rounded-lg text-center hover:bg-green-700 transition-colors">
+                            <i class="fas fa-user-plus text-2xl mb-2"></i>
+                            <p class="text-sm">Add User</p>
+                        </button>
+                        <button class="p-4 bg-blue-600 rounded-lg text-center hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-chart-bar text-2xl mb-2"></i>
+                            <p class="text-sm">View Stats</p>
+                        </button>
+                        <button class="p-4 bg-purple-600 rounded-lg text-center hover:bg-purple-700 transition-colors">
+                            <i class="fas fa-cog text-2xl mb-2"></i>
+                            <p class="text-sm">Settings</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Traffic Chart -->
+                <div class="dashboard-card p-6">
+                    <h2 class="text-xl font-bold mb-6">Traffic Overview</h2>
+                    <div class="chart-container">
+                        <div class="flex justify-between mb-4">
+                            <div>
+                                <p class="text-2xl font-bold">45,892</p>
+                                <p class="text-gray-400 text-sm">Weekly Visitors</p>
+                            </div>
+                            <div class="text-green-400">
+                                <i class="fas fa-arrow-up"></i> 12.5%
+                            </div>
+                        </div>
+                        <div class="h-48 bg-gray-800 rounded-lg flex items-end justify-between p-4">
+                            <!-- Simple bar chart representation -->
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 60%"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 80%"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 45%"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 70%"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 90%"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 65%"></div>
+                            <div class="w-8 bg-indigo-500 rounded-t" style="height: 75%"></div>
+                        </div>
+                        <div class="flex justify-between mt-2 text-xs text-gray-400">
+                            <span>Mon</span>
+                            <span>Tue</span>
+                            <span>Wed</span>
+                            <span>Thu</span>
+                            <span>Fri</span>
+                            <span>Sat</span>
+                            <span>Sun</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="dashboard-card p-6 mb-8">
+            <h2 class="text-xl font-bold mb-6">Recent Activity</h2>
+            <div class="space-y-4">
+                <div class="flex items-center p-4 bg-gray-800 rounded-lg">
+                    <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-user-plus text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">New user registered</p>
+                        <p class="text-gray-400 text-sm">John Doe joined the platform</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">2 hours ago</span>
+                </div>
+
+                <div class="flex items-center p-4 bg-gray-800 rounded-lg">
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-newspaper text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">Article published</p>
+                        <p class="text-gray-400 text-sm">"Global Economic Summit" was published</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">4 hours ago</span>
+                </div>
+
+                <div class="flex items-center p-4 bg-gray-800 rounded-lg">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-comment text-white"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">New comment</p>
+                        <p class="text-gray-400 text-sm">User commented on "AI Phone Unveiled"</p>
+                    </div>
+                    <span class="text-gray-400 text-sm">6 hours ago</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Status -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="dashboard-card p-6 text-center">
+                <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-server text-2xl text-white"></i>
+                </div>
+                <h3 class="font-bold mb-2">Server Status</h3>
+                <p class="text-green-400 font-semibold">Online</p>
+                <p class="text-gray-400 text-sm mt-2">99.9% Uptime</p>
+            </div>
+
+            <div class="dashboard-card p-6 text-center">
+                <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-database text-2xl text-white"></i>
+                </div>
+                <h3 class="font-bold mb-2">Database</h3>
+                <p class="text-green-400 font-semibold">Healthy</p>
+                <p class="text-gray-400 text-sm mt-2">2.4GB Used</p>
+            </div>
+
+            <div class="dashboard-card p-6 text-center">
+                <div class="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-alt text-2xl text-white"></i>
+                </div>
+                <h3 class="font-bold mb-2">Security</h3>
+                <p class="text-green-400 font-semibold">Protected</p>
+                <p class="text-gray-400 text-sm mt-2">No threats detected</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple interactivity for the admin panel
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation items click handler
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Quick action buttons
+            const quickActions = document.querySelectorAll('.grid.grid-cols-2 button');
+            quickActions.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.querySelector('p').textContent;
+                    alert(`Quick action: ${action}`);
+                });
+            });
+
+            // Table row actions
+            const actionButtons = document.querySelectorAll('.table-row button');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const action = this.querySelector('i').className.includes('edit') ? 'edit' : 'delete';
+                    alert(`Would ${action} this article`);
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('input[type="text"]');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    alert(`Searching for: ${this.value}`);
+                    this.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
